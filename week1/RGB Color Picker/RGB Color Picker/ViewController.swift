@@ -32,6 +32,27 @@ class ViewController: UIViewController {
         
     }
     
-
+    @IBAction func redSliderMoved(_ sender: UISlider) {
+        
+        let roundedValue = rSlider.value.rounded()
+        
+        rValueLabel.text = String(Int(roundedValue))
+    }
+    
+    
+    @IBAction func greenSliderMoved(_ sender: UISlider) {
+        
+        let roundedValue = gSlider.value.rounded()
+        
+        gValueLabel.text = String(Int(roundedValue))
+    }
+    
+    
+    @IBAction func blueSliderMoved(_ sender: UISlider) {
+        
+        let roundedValue = bSlider.value.rounded()
+        
+        bValueLabel.text = String(Int(roundedValue))
+    }
 }
 
