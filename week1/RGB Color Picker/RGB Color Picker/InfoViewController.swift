@@ -15,10 +15,18 @@ class InfoViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+
+        let url = URL(string:"https://en.wikipedia.org/wiki/RGB_color_model")!
+        let request = URLRequest(url: url)
+        webView.load(request)
+
 
         // Do any additional setup after loading the view.
     }
     @IBAction func closeButtonPressed(_ sender: UIButton) {
+        
+        dismiss(animated: true, completion: nil)
     }
     
 

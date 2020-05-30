@@ -14,6 +14,7 @@
 		40F293242480B15200BE3514 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 40F293232480B15200BE3514 /* Assets.xcassets */; };
 		40F293272480B15200BE3514 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40F293252480B15200BE3514 /* LaunchScreen.storyboard */; };
 		40F2932F2481889700BE3514 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F2932E2481889600BE3514 /* InfoViewController.swift */; };
+		40F293322481F63100BE3514 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40F293312481F63100BE3514 /* WebKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		40F293262480B15200BE3514 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		40F293282480B15200BE3514 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		40F2932E2481889600BE3514 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
+		40F293312481F63100BE3514 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,6 +35,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				40F293322481F63100BE3514 /* WebKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -44,6 +47,7 @@
 			children = (
 				40F293192480B14F00BE3514 /* RGB Color Picker */,
 				40F293182480B14F00BE3514 /* Products */,
+				40F293302481F63000BE3514 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -68,6 +72,14 @@
 				40F2932E2481889600BE3514 /* InfoViewController.swift */,
 			);
 			path = "RGB Color Picker";
+			sourceTree = "<group>";
+		};
+		40F293302481F63000BE3514 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				40F293312481F63100BE3514 /* WebKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
