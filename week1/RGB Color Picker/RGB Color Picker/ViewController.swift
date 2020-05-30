@@ -11,6 +11,7 @@ import UIKit
 class ViewController: UIViewController {
     
     
+    @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var colorNameLabel: UILabel!
     @IBOutlet weak var rSlider: UISlider!
     @IBOutlet weak var gSlider: UISlider!
@@ -27,15 +28,12 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        
-//        rValue = CGFloat(rSlider.value)
-//        gValue = CGFloat(gSlider.value)
-//        bValue = CGFloat(bSlider.value)
+        overrideUserInterfaceStyle = .light
         
     }
     @IBAction func setColorPressed(_ sender: UIButton) {
         
-        print(rValue, gValue, bValue)
+
         var textField = UITextField()
         
         let alert = UIAlertController(title: "Enter the name for your color creation", message: "", preferredStyle: .alert)
@@ -43,8 +41,8 @@ class ViewController: UIViewController {
         let action = UIAlertAction(title: "Set Color", style: .default) {
             (action) in
             self.colorNameLabel.text = textField.text!
-            print(self.rValue, self.gValue, self.bValue)
             self.view.backgroundColor = UIColor(red: self.rValue/255, green: self.gValue/255, blue: self.bValue/255, alpha: 1.0)
+            self.containerView.backgroundColor = UIColor(red: self.rValue/255, green: self.gValue/255, blue: self.bValue/255, alpha: 1.0)
         }
 
         alert.addAction(action)
@@ -64,7 +62,11 @@ class ViewController: UIViewController {
         
         resetAll()
         
-        self.view.backgroundColor = UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        view.backgroundColor = UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        containerView.backgroundColor = UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        colorNameLabel.text = "Create Your Color"
+
+        
         
     }
     
