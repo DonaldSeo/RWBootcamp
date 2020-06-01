@@ -122,7 +122,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="QWY-Ix-d11">
-                                        <rect key="frame" x="30" y="688" width="322" height="30"/>
+                                        <rect key="frame" x="30" y="698" width="322" height="30"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1BA-tT-5Gf">
                                                 <rect key="frame" x="0.0" y="0.0" width="39" height="30"/>
@@ -145,13 +145,14 @@
                                                 </connections>
                                             </button>
                                         </subviews>
+                                        <color key="tintColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </stackView>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
                                     <constraint firstItem="UGO-iW-LVW" firstAttribute="top" secondItem="y97-GL-ytt" secondAttribute="top" constant="20" id="2HS-9E-ZNW"/>
                                     <constraint firstItem="UGO-iW-LVW" firstAttribute="leading" secondItem="y97-GL-ytt" secondAttribute="leading" constant="5" id="F2G-ws-KyB"/>
-                                    <constraint firstAttribute="bottom" secondItem="QWY-Ix-d11" secondAttribute="bottom" constant="30" id="PKC-mI-JSl"/>
+                                    <constraint firstAttribute="bottom" secondItem="QWY-Ix-d11" secondAttribute="bottom" constant="20" id="PKC-mI-JSl"/>
                                     <constraint firstAttribute="trailing" secondItem="UGO-iW-LVW" secondAttribute="trailing" constant="5" id="a5O-Qy-Z4S"/>
                                     <constraint firstAttribute="trailing" secondItem="QWY-Ix-d11" secondAttribute="trailing" constant="30" id="tFS-Gl-ODM"/>
                                     <constraint firstItem="QWY-Ix-d11" firstAttribute="leading" secondItem="y97-GL-ytt" secondAttribute="leading" constant="30" id="xSh-Rf-CQ1"/>
@@ -169,12 +170,15 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="bLabel" destination="3WG-7s-h4e" id="QXW-uy-Vk9"/>
                         <outlet property="bSlider" destination="SxT-Sd-dtL" id="IRn-Ih-GAb"/>
                         <outlet property="bValueLabel" destination="0ro-Ss-SqS" id="vZr-Wy-JKW"/>
                         <outlet property="colorNameLabel" destination="Wt6-3f-cWt" id="9eI-Nu-MLf"/>
                         <outlet property="containerView" destination="y97-GL-ytt" id="lka-N8-Quy"/>
+                        <outlet property="gLabel" destination="dq2-rp-A17" id="t9w-YB-8OW"/>
                         <outlet property="gSlider" destination="870-ch-IP6" id="c5B-p4-t1m"/>
                         <outlet property="gValueLabel" destination="j5b-Lp-MJY" id="O7b-ii-ZLB"/>
+                        <outlet property="rLabel" destination="Cqa-Za-Oip" id="K2r-ci-fhR"/>
                         <outlet property="rSlider" destination="P7Q-c9-e8h" id="K6w-o4-IO6"/>
                         <outlet property="rValueLabel" destination="l6E-Fj-6DH" id="cYG-se-bn7"/>
                     </connections>

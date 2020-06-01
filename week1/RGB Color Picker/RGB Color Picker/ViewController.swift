@@ -19,6 +19,9 @@ class ViewController: UIViewController {
     @IBOutlet weak var rValueLabel: UILabel!
     @IBOutlet weak var gValueLabel: UILabel!
     @IBOutlet weak var bValueLabel: UILabel!
+    @IBOutlet weak var rLabel: UILabel!
+    @IBOutlet weak var gLabel: UILabel!
+    @IBOutlet weak var bLabel: UILabel!
     
     var rValue : CGFloat = 0.0
     var gValue : CGFloat  = 0.0
@@ -40,9 +43,24 @@ class ViewController: UIViewController {
         
         let action = UIAlertAction(title: "Set Color", style: .default) {
             (action) in
-            self.colorNameLabel.text = textField.text!
-            self.view.backgroundColor = UIColor(red: self.rValue/255, green: self.gValue/255, blue: self.bValue/255, alpha: 1.0)
-            self.containerView.backgroundColor = UIColor(red: self.rValue/255, green: self.gValue/255, blue: self.bValue/255, alpha: 1.0)
+            if self.rValue <= 30.0 && self.gValue <= 30.0 && self.bValue <= 30.0 {
+                self.colorNameLabel.text = textField.text!
+                self.colorNameLabel.textColor = UIColor.white
+                self.rValueLabel.textColor = UIColor.white
+                self.gValueLabel.textColor = UIColor.white
+                self.bValueLabel.textColor = UIColor.white
+                self.rLabel.textColor = UIColor.white
+                self.gLabel.textColor = UIColor.white
+                self.bLabel.textColor = UIColor.white
+                self.view.backgroundColor = UIColor(red: self.rValue/255, green: self.gValue/255, blue: self.bValue/255, alpha: 1.0)
+                self.containerView.backgroundColor = UIColor(red: self.rValue/255, green: self.gValue/255, blue: self.bValue/255, alpha: 1.0)
+                
+            } else {
+                self.colorNameLabel.text = textField.text!
+                self.view.backgroundColor = UIColor(red: self.rValue/255, green: self.gValue/255, blue: self.bValue/255, alpha: 1.0)
+                self.containerView.backgroundColor = UIColor(red: self.rValue/255, green: self.gValue/255, blue: self.bValue/255, alpha: 1.0)
+            }
+            
         }
 
         alert.addAction(action)
@@ -65,9 +83,9 @@ class ViewController: UIViewController {
         view.backgroundColor = UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         containerView.backgroundColor = UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         colorNameLabel.text = "Create Your Color"
+        colorNameLabel.textColor = UIColor.black
 
-        
-        
+
     }
     
     @IBAction func redSliderMoved(_ sender: UISlider) {
@@ -104,6 +122,13 @@ class ViewController: UIViewController {
         rValueLabel.text = "0"
         gValueLabel.text = "0"
         bValueLabel.text = "0"
+        
+        self.rValueLabel.textColor = UIColor.black
+        self.gValueLabel.textColor = UIColor.black
+        self.bValueLabel.textColor = UIColor.black
+        self.rLabel.textColor = UIColor.black
+        self.gLabel.textColor = UIColor.black
+        self.bLabel.textColor = UIColor.black
         
     }
 }
