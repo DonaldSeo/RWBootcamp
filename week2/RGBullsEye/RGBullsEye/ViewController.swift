@@ -38,27 +38,116 @@ class ViewController: UIViewController {
   @IBOutlet weak var roundLabel: UILabel!
   @IBOutlet weak var scoreLabel: UILabel!
   
-  let game = BullsEyeGame()
+  var game = BullsEyeGame()
   var rgb = RGB()
+  var targetRGB = RGB()
+    
+  var quickDiff: Int {
+    return abs(game.targetValue - currentValue)
+  }
+
+
   
   @IBAction func aSliderMoved(sender: UISlider) {
-
+    
+    switch sender {
+    case redSlider:
+        let roundedValue = redSlider.value.rounded()
+        rgb.r = Int(roundedValue)
+        redLabel.text = String(rgb.r)
+    case greenSlider:
+        let roundedValue = greenSlider.value.rounded()
+        rgb.g = Int(roundedValue)
+        greenLabel.text = String(rgb.g)
+    case blueSlider:
+        let roundedValue = blueSlider.value.rounded()
+        rgb.b = Int(roundedValue)
+        blueLabel.text = String(rgb.b)
+    default:
+        print("this will never happen")
+    }
+    
+    sliderHint()
+//    print(targetRGB)
+    guessLabel.backgroundColor = UIColor.init(rgbStruct: rgb)
+    
+//    print(Int(rgb.difference(target: targetRGB)*100.rounded()))
+    print(rgb.difference(target: targetRGB)*100)
   }
   
   @IBAction func showAlert(sender: AnyObject) {
-
+    
+    
+    //
+    // calculate difference
+    let difference = rgb.difference(target: targetRGB)
+    let (title, points) = game.calculateScore(with: difference)
+    //display and points earned in alertview
+    
+    let message = "you scored \(points) points!"
+    
+    let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+    //call startNewRound and updateView in action
+    let action = UIAlertAction(title: "OK", style: .default) { (action) in
+        self.game.startNewRound()
+        self.rgb.setDefault()
+        self.updateView()
+    }
+    
+    //present
+    alert.addAction(action)
+    
+    present(alert, animated: true, completion: nil)
+    
   }
   
   @IBAction func startOver(sender: AnyObject) {
+    game.resetGame()
+    game.startNewRound()
+    rgb.setDefault()
+    updateView()
 
   }
   
   func updateView() {
-
+    //resetting rgb sliders and labels to default
+    redLabel.text = String(rgb.r)
+    greenLabel.text = String(rgb.r)
+    blueLabel.text = String(rgb.r)
+    redSlider.value = Float(rgb.r)
+    greenSlider.value = Float(rgb.g)
+    blueSlider.value = Float(rgb.b)
+    
+    //resetting guessLabel's background color to default
+    guessLabel.backgroundColor = UIColor.init(rgbStruct: rgb)
+    
+    //set target label's background color with random rgb values
+    targetRGB = game.newTargetRGB()
+    targetLabel.backgroundColor = UIColor.init(rgbStruct: targetRGB)
+    
+    
+    //reset round & score label
+    scoreLabel.text = "Score: \(String(game.score))"
+    roundLabel.text = "Round: \(String(game.round))"
+    
+    sliderHint()
   }
+  
+    func sliderHint() {
+        UIColor.blue.withAlphaComponent(CGFloat(quickDiff)/100.0)
+        greenSlider.minimumTrackTintColor =
+        UIColor.blue.withAlphaComponent(CGFloat(quickDiff)/100.0)
+        blueSlider.minimumTrackTintColor =
+        UIColor.blue.withAlphaComponent(CGFloat(quickDiff)/100.0)
+    }
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    sliderHint()
+    
+    game.startNewRound()
+    updateView()
+
   }
 }
 

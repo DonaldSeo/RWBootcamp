@@ -43,4 +43,11 @@ struct RGB {
     let bDiff = Double(b - target.b)
     return sqrt(rDiff * rDiff + gDiff * gDiff + bDiff * bDiff) / 255.0
   }
+  
+  mutating func setDefault() {
+    r = 127
+    g = 127
+    b = 127
+    }
+    
 }

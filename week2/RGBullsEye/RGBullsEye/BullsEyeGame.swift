@@ -23,5 +23,55 @@
 import Foundation
 
 struct BullsEyeGame {  // might be class?
+    
+    var score = 0
+    var round = 0
+    var targetR = 0
+    var targetG = 0
+    var targetB = 0
+    
+    
+    mutating func startNewRound() {
+        round += 1
+        
+    }
+    
+    mutating func resetGame() {
+        score = 0
+        round = 0
+    }
+    
+    
+    mutating func newTargetRGB() -> RGB {
+        
+        targetR = Int.random(in: 0...255)
+        targetG = Int.random(in: 0...255)
+        targetB = Int.random(in: 0...255)
+        return RGB(r: targetR, g: targetG, b: targetB)
+    }
+    
+    mutating func calculateScore(with difference: Double) ->(String, Int) {
+        let diff_rounded = Int(difference*100.rounded())
+        var points = 100 - diff_rounded
+        let title: String
+        
+        if diff_rounded == 0 {
+            title = "Perfect!!!"
+            points += 100
+        } else if diff_rounded < 5 {
+            title = "You Almost Had it!!"
+            if diff_rounded == 1 {
+                points += 50
+            }
+        } else if diff_rounded  < 10 {
+            title = "Pretty good!!"
+        } else {
+            title = "Not even close.. :("
+            points = 0
+        }
+        score += points
+        return (title, points)
+    }
+
 
 }
