@@ -42,10 +42,6 @@ class ViewController: UIViewController {
   var rgb = RGB()
   var targetRGB = RGB()
     
-  var quickDiff: Int {
-    return abs(game.targetValue - currentValue)
-  }
-
 
   
   @IBAction func aSliderMoved(sender: UISlider) {
@@ -67,7 +63,6 @@ class ViewController: UIViewController {
         print("this will never happen")
     }
     
-    sliderHint()
 //    print(targetRGB)
     guessLabel.backgroundColor = UIColor.init(rgbStruct: rgb)
     
@@ -129,22 +124,11 @@ class ViewController: UIViewController {
     //reset round & score label
     scoreLabel.text = "Score: \(String(game.score))"
     roundLabel.text = "Round: \(String(game.round))"
-    
-    sliderHint()
+
   }
-  
-    func sliderHint() {
-        UIColor.blue.withAlphaComponent(CGFloat(quickDiff)/100.0)
-        greenSlider.minimumTrackTintColor =
-        UIColor.blue.withAlphaComponent(CGFloat(quickDiff)/100.0)
-        blueSlider.minimumTrackTintColor =
-        UIColor.blue.withAlphaComponent(CGFloat(quickDiff)/100.0)
-    }
-  
+    
   override func viewDidLoad() {
     super.viewDidLoad()
-    sliderHint()
-    
     game.startNewRound()
     updateView()
 
