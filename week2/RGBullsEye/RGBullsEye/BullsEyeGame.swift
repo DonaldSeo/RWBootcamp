@@ -67,7 +67,6 @@ struct BullsEyeGame {  // might be class?
             title = "Pretty good!!"
         } else {
             title = "Not even close.. :("
-            points = 0
         }
         score += points
         return (title, points)
