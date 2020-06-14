@@ -34,9 +34,12 @@ import UIKit
 
 class HomeViewController: UIViewController{
 
-  @IBOutlet weak var view1: UIView!
-  @IBOutlet weak var view2: UIView!
-  @IBOutlet weak var view3: UIView!
+  
+
+  @IBOutlet weak var view1: CustomView!
+  @IBOutlet weak var view2: CustomView!
+  @IBOutlet weak var view3: CustomView!
+  
   @IBOutlet weak var headingLabel: UILabel!
   @IBOutlet weak var view1TextLabel: UILabel!
   @IBOutlet weak var view2TextLabel: UILabel!
@@ -47,13 +50,12 @@ class HomeViewController: UIViewController{
     
   override func viewDidLoad() {
     super.viewDidLoad()
-    setupViews()
+
     setupLabels()
     setView1Data()
     setView2Data()
     setView3Data()
-    
-//    print(cryptoData!)
+
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -66,32 +68,6 @@ class HomeViewController: UIViewController{
     unregisterForTheme()
   }
 
-  func setupViews() {
-      
-    view1.backgroundColor = .systemGray6
-    view1.layer.borderColor = UIColor.lightGray.cgColor
-    view1.layer.borderWidth = 1.0
-    view1.layer.shadowColor = UIColor.black.withAlphaComponent(0.2).cgColor
-    view1.layer.shadowOffset = CGSize(width: 0, height: 2)
-    view1.layer.shadowRadius = 4
-    view1.layer.shadowOpacity = 0.8
-    
-    view2.backgroundColor = .systemGray6
-    view2.layer.borderColor = UIColor.lightGray.cgColor
-    view2.layer.borderWidth = 1.0
-    view2.layer.shadowColor = UIColor.black.withAlphaComponent(0.2).cgColor
-    view2.layer.shadowOffset = CGSize(width: 0, height: 2)
-    view2.layer.shadowRadius = 4
-    view2.layer.shadowOpacity = 0.8
-    
-    view3.backgroundColor = .systemGray6
-    view3.layer.borderColor = UIColor.lightGray.cgColor
-    view3.layer.borderWidth = 1.0
-    view3.layer.shadowColor = UIColor.black.withAlphaComponent(0.2).cgColor
-    view3.layer.shadowOffset = CGSize(width: 0, height: 2)
-    view3.layer.shadowRadius = 4
-    view3.layer.shadowOpacity = 0.8
-  }
   
   func setupLabels() {
     headingLabel.font = UIFont.systemFont(ofSize: 20, weight: .medium)
