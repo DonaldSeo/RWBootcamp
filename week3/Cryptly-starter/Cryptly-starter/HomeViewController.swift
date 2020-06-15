@@ -40,6 +40,15 @@ class HomeViewController: UIViewController{
   @IBOutlet weak var view2: CustomView!
   @IBOutlet weak var view3: CustomView!
   
+  @IBOutlet weak var mostFallingView: CustomView!
+  @IBOutlet weak var mostRisingView: CustomView!
+  
+  @IBOutlet weak var mostFallingViewLabel: UILabel!
+  @IBOutlet weak var mostRisingViewLabel: UILabel!
+  
+  @IBOutlet weak var mostRisingTitleLabel: UILabel!
+  @IBOutlet weak var mostFallingTitleLabel: UILabel!
+  
   @IBOutlet weak var headingLabel: UILabel!
   @IBOutlet weak var view1TextLabel: UILabel!
   @IBOutlet weak var view2TextLabel: UILabel!
@@ -55,6 +64,9 @@ class HomeViewController: UIViewController{
     setView1Data()
     setView2Data()
     setView3Data()
+    setMostFallingView()
+    setMostRisingView()
+    
 
   }
   
@@ -73,6 +85,27 @@ class HomeViewController: UIViewController{
     headingLabel.font = UIFont.systemFont(ofSize: 20, weight: .medium)
     view1TextLabel.font = UIFont.systemFont(ofSize: 18, weight: .regular)
     view2TextLabel.font = UIFont.systemFont(ofSize: 18, weight: .regular)
+  }
+  
+  func setMostFallingView() {
+    guard let cryptoData = cryptoData
+      else {
+        return
+    }
+    let mostFallingCurr = cryptoData.min { $0.difference < $1.difference }
+    
+    mostFallingViewLabel.text = "\(mostFallingCurr!.difference)"
+    
+  }
+  
+  func setMostRisingView() {
+    guard let cryptoData = cryptoData
+      else {
+        return
+    }
+    let mostRisingCurr = cryptoData.max { $0.difference < $1.difference }
+    mostRisingViewLabel.text = "\(mostRisingCurr!.difference)"
+    
   }
   
   func setView1Data() {
@@ -143,8 +176,8 @@ extension HomeViewController: Themeable {
       else {
         return
     }
-    let view_list = [view1, view2, view3]
-    let viewLabel_list = [view1TextLabel, view2TextLabel, view3TextLabel]
+    let view_list = [view1, view2, view3, mostFallingView, mostRisingView]
+    let viewLabel_list = [view1TextLabel, view2TextLabel, view3TextLabel, mostRisingTitleLabel, mostFallingTitleLabel, mostRisingViewLabel, mostRisingViewLabel]
     
     view_list.forEach { $0?.backgroundColor = theme.widgetBackgroundColor }
     
