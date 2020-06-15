@@ -51,8 +51,8 @@ class CustomView: UIView {
   
   
   private func setupView() {
-    self.backgroundColor = .systemGray6
-    self.layer.borderColor = UIColor.lightGray.cgColor
+    self.backgroundColor = ThemeManager.shared.currentTheme?.widgetBackgroundColor
+    self.layer.borderColor = ThemeManager.shared.currentTheme?.borderColor.cgColor
     self.layer.borderWidth = 1.0
     self.layer.shadowColor = UIColor.black.withAlphaComponent(0.2).cgColor
     self.layer.shadowOffset = CGSize(width: 0, height: 2)
