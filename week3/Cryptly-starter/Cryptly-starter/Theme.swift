@@ -60,7 +60,7 @@ struct LightTheme: Theme {
 struct DarkTheme: Theme {
   let backgroundColor: UIColor = .black
   
-  let textColor: UIColor = .white
+  let textColor: UIColor = .yellow
   
   let borderColor: UIColor = .white
   

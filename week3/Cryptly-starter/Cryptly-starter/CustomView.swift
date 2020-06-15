@@ -32,6 +32,13 @@
 
 import UIKit
 
+protocol Roundable: UIView {
+  var cornerRadius: CGFloat { get }
+  func round()
+}
+
+
+
 class CustomView: UIView {
 
     /*

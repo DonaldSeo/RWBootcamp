@@ -66,6 +66,7 @@ class HomeViewController: UIViewController{
     setView3Data()
     setMostFallingView()
     setMostRisingView()
+    overrideUserInterfaceStyle = .light
     
 
   }
@@ -177,7 +178,7 @@ extension HomeViewController: Themeable {
         return
     }
     let view_list = [view1, view2, view3, mostFallingView, mostRisingView]
-    let viewLabel_list = [view1TextLabel, view2TextLabel, view3TextLabel, mostRisingTitleLabel, mostFallingTitleLabel, mostRisingViewLabel, mostRisingViewLabel]
+    let viewLabel_list = [view1TextLabel, view2TextLabel, view3TextLabel, mostRisingTitleLabel, mostFallingTitleLabel, mostFallingViewLabel, mostRisingViewLabel]
     
     view_list.forEach { $0?.backgroundColor = theme.widgetBackgroundColor }
     
