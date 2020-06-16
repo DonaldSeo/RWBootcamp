@@ -38,4 +38,14 @@ struct CryptoCurrency: Codable {
   let symbol: String
   let currentValue: Double
   let previousValue: Double
+  var difference: Double {
+    currentValue - previousValue
+  }
+  var trend: Trend {
+    difference > 0 ? .rising : .falling
+  }
+  
+  enum Trend: Int, Codable {
+    case rising, falling
+  }
 }

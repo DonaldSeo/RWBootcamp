@@ -1,15 +1,15 @@
 /// Copyright (c) 2020 Razeware LLC
-/// 
+///
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
 /// in the Software without restriction, including without limitation the rights
 /// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 /// copies of the Software, and to permit persons to whom the Software is
 /// furnished to do so, subject to the following conditions:
-/// 
+///
 /// The above copyright notice and this permission notice shall be included in
 /// all copies or substantial portions of the Software.
-/// 
+///
 /// Notwithstanding the foregoing, you may not use, copy, modify, merge, publish,
 /// distribute, sublicense, create a derivative work, and/or sell copies of the
 /// Software in any work that is designed, intended, or marketed for pedagogical or
@@ -17,7 +17,7 @@
 /// or information technology.  Permission for such use, copying, modification,
 /// merger, publication, distribution, sublicensing, creation of derivative works,
 /// or sale is expressly withheld.
-/// 
+///
 /// This project and source code may use libraries or frameworks that are
 /// released under various Open-Source licenses. Use of those libraries and
 /// frameworks are governed by their own individual licenses.
@@ -30,47 +30,51 @@
 /// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 /// THE SOFTWARE.
 
-import Foundation
 import UIKit
 
-protocol Theme {
-  
-//  backgroundColor of type UIColor - View’s background color
-//  textColor of type UIColor - Text Colors
-//  borderColor of type UIColor - Border color of views which contain data
-//  widgetBackgroundColor - BackgroundColor of views which contain data
-  var backgroundColor: UIColor { get }
-  var textColor: UIColor { get }
-  var borderColor: UIColor { get }
-  var widgetBackgroundColor: UIColor { get }
-  
+protocol Roundable: UIView {
+  var cornerRadius: CGFloat { get }
+  func round()
 }
 
-struct LightTheme: Theme {
-  let backgroundColor: UIColor = .white
-  
-  let textColor: UIColor = .black
-  
-  let borderColor: UIColor = .black
-  
-  let widgetBackgroundColor: UIColor = .systemPink
-  
+extension Roundable {
+  var cornerRadius: CGFloat {
+    return 8.0
+  }
+  func round() {
+    self.layer.cornerRadius = cornerRadius
+  }
 }
 
-struct DarkTheme: Theme {
-  let backgroundColor: UIColor = .black
+
+class CustomView: UIView, Roundable {
+
+    /*
+    // Only override draw() if you perform custom drawing.
+    // An empty implementation adversely affects performance during animation.
+    override func draw(_ rect: CGRect) {
+        // Drawing code
+    }
+    */
+  // init from code
+
+  required init?(coder: NSCoder) {
+    super.init(coder: coder)
+    setupView()
+  }
+
   
-  let textColor: UIColor = .yellow
   
-  let borderColor: UIColor = .white
-  
-  let widgetBackgroundColor: UIColor = .systemBlue
-  
+  private func setupView() {
+    self.backgroundColor = ThemeManager.shared.currentTheme?.widgetBackgroundColor
+    self.layer.borderColor = ThemeManager.shared.currentTheme?.borderColor.cgColor
+    self.layer.borderWidth = 1.0
+    self.layer.shadowColor = UIColor.black.withAlphaComponent(0.2).cgColor
+    self.layer.shadowOffset = CGSize(width: 0, height: 2)
+    self.layer.shadowRadius = 4
+    self.layer.shadowOpacity = 0.8
+    self.round()
+  }
 
 }
 
-protocol Themeable {
-  func registerForTheme()
-  func unregisterForTheme()
-  func themeChanged()
-}
