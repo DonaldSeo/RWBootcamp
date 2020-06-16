@@ -37,9 +37,17 @@ protocol Roundable: UIView {
   func round()
 }
 
+extension Roundable {
+  var cornerRadius: CGFloat {
+    return 8.0
+  }
+  func round() {
+    self.layer.cornerRadius = cornerRadius
+  }
+}
 
 
-class CustomView: UIView {
+class CustomView: UIView, Roundable {
 
     /*
     // Only override draw() if you perform custom drawing.
@@ -65,6 +73,8 @@ class CustomView: UIView {
     self.layer.shadowOffset = CGSize(width: 0, height: 2)
     self.layer.shadowRadius = 4
     self.layer.shadowOpacity = 0.8
+    self.round()
   }
 
 }
+
