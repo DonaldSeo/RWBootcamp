@@ -44,6 +44,7 @@ class ViewController: UIViewController {
         //need to check array index out of bound error
         if person1.items.count == person2.items.count {
             print(calculateCompatibility())
+            openResultAlertView()
             //TODO
             //need to reset counters
             //need to reset person 1 person 2 items dict
@@ -53,17 +54,46 @@ class ViewController: UIViewController {
     }
     
     func checkItemIndex() {
-        if currentItemIndex == compatibilityItems.count {
-            currentPerson = person2
-            currentItemIndex = 0
-            questionLabel.text = "Person\(person2.id), " + "what do you think about..."
-            compatibilityItemLabel.text = compatibilityItems[currentItemIndex]
+        if currentPerson?.id == 2 && currentItemIndex == compatibilityItems.count {
+            //if person 1 and person 2 both went through all item list
+            //reset each persons items dict and start over from person 1
+            //show Alert
+            person1.items.removeAll()
+            person2.items.removeAll()
+            resetPerson(to: person1)
+ 
+        } else if currentPerson?.id == 1 && currentItemIndex == compatibilityItems.count {
+            // if only first peron went through the items
+            //change the turn to next person
+            resetPerson(to: person2)
             
         } else {
+            //either person 1 or person 2 is going through items
+            //show next in list item
            compatibilityItemLabel.text = compatibilityItems[currentItemIndex]
         }
     }
+    
+    func resetPerson(to person: Person) {
+        //with given person, reset labels and item index
+        currentPerson = person
+        currentItemIndex = 0
+        questionLabel.text = "Person\(person.id), How do you feel about..."
+        compatibilityItemLabel.text = compatibilityItems[currentItemIndex]
+    }
 
+    func openResultAlertView() {
+        
+        let compatibilityResult = calculateCompatibility()
+        let message = "you two are \(compatibilityResult) compatible!"
+        
+        let alert = UIAlertController(title: "Comatibility Match Result", message: message, preferredStyle: UIAlertController.Style.alert)
+        
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        
+        self.present(alert, animated: true, completion: nil)
+
+    }
     func calculateCompatibility() -> String {
         // If diff 0.0 is 100% and 5.0 is 0%, calculate match percentage
         var percentagesForAllItems: [Double] = []
