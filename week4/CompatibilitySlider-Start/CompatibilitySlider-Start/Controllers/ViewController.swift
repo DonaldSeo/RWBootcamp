@@ -48,14 +48,14 @@ class ViewController: UIViewController {
     }
     
     func checkItemIndex() {
-        if currentPerson?.id == 2 && currentItemIndex == compatibilityCheck.compatibilityItems.count {
+        if currentPerson == compatibilityCheck.person2 && currentItemIndex == compatibilityCheck.compatibilityItems.count {
             //if person 1 and person 2 both went through all item list
             //reset each persons items dict and start over from person 1
             compatibilityCheck.person1.items.removeAll()
             compatibilityCheck.person2.items.removeAll()
             resetPerson(to: compatibilityCheck.person1)
  
-        } else if currentPerson?.id == 1 && currentItemIndex == compatibilityCheck.compatibilityItems.count {
+        } else if currentPerson == compatibilityCheck.person1 && currentItemIndex == compatibilityCheck.compatibilityItems.count {
             // if only first person went through the items
             //change the turn to next person
             resetPerson(to: compatibilityCheck.person2)
