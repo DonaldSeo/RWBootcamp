@@ -131,9 +131,6 @@ extension ViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let mediaPost = MediaPostsHandler.shared.mediaPosts[indexPath.row]
-        let postDateFormatter = DateFormatter()
-        postDateFormatter.dateFormat = "dd MMM, HH:mm:ss"
-        
         let cell = MediaPostsViewModel.shared.checkPostTypeCell(for: mediaPost, for: tableView)
         
         return cell
