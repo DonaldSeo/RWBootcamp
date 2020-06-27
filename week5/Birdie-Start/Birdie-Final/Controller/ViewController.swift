@@ -11,6 +11,7 @@ import UIKit
 class ViewController: UIViewController {
 
     @IBOutlet weak var tableview: UITableView!
+    var userPickedImage: UIImage?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,6 +21,7 @@ class ViewController: UIViewController {
 
     func setUpTableView() {
         tableview.dataSource = self
+        tableview.separatorColor = .clear
         
         let textCellNib = UINib(nibName: "TextPostTableViewCell", bundle: nil)
         let imageCellNib = UINib(nibName: "ImagePostTableViewCell", bundle: nil)
@@ -31,13 +33,38 @@ class ViewController: UIViewController {
         tableview.estimatedRowHeight = 120.0
     }
     
+    func setUpImagePicker() {
+        let picker = UIImagePickerController()
+        picker.delegate = self
+        picker.allowsEditing = false
+        
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+            picker.sourceType = .camera
+        } else {
+            picker.sourceType = .photoLibrary
+            picker.modalPresentationStyle = .fullScreen
+        }
+        
+        present(picker, animated: true, completion: nil)
+    }
     
 
     @IBAction func didPressCreateTextPostButton(_ sender: Any) {
+        presentTextPostAlert()
+    }
 
+    @IBAction func didPressCreateImagePostButton(_ sender: Any) {
+        setUpImagePicker()
+    }
+    
+    func presentTextPostAlert() {
         let alert = UIAlertController(title: "Create Post", message: "what's up?", preferredStyle: .alert)
-        alert.addTextField()
-        alert.addTextField()
+        alert.addTextField { (textField) in
+            textField.placeholder = "Username"
+        }
+        alert.addTextField { (textField) in
+            textField.placeholder = "Message"
+        }
         
         let addAction = UIAlertAction(title: "Ok", style: .default) { (action) in
             
@@ -58,11 +85,40 @@ class ViewController: UIViewController {
         alert.addAction(cancelAction)
         
         present(alert, animated: true)
-        
+            
     }
+    
+    func presentImagePostAlert() {
+        let alert = UIAlertController(title: "Create Post", message: "what's up?", preferredStyle: .alert)
+        alert.addTextField { (textField) in
+            textField.placeholder = "Username"
+        }
+        alert.addTextField { (textField) in
+            textField.placeholder = "Message"
+        }
 
-    @IBAction func didPressCreateImagePostButton(_ sender: Any) {
+        let addAction = UIAlertAction(title: "Ok", style: .default) { (action) in
 
+            let name = alert.textFields![0]
+            let message = alert.textFields![1]
+//            self.setUpImagePicker()
+            if let pickedImage = self.userPickedImage {
+                let imagePost = ImagePost(textBody: message.text!, userName: name.text!, timestamp: Date(), image: pickedImage)
+                MediaPostsHandler.shared.addImagePost(imagePost: imagePost)
+            }
+
+            self.tableview.reloadData()
+        }
+
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
+
+        }
+
+        alert.addAction(addAction)
+        alert.addAction(cancelAction)
+
+
+        present(alert, animated: true)
     }
 
 }
@@ -79,30 +135,26 @@ extension ViewController: UITableViewDataSource {
         let postDateFormatter = DateFormatter()
         postDateFormatter.dateFormat = "dd MMM, HH:mm:ss"
         
-        switch mediaPost {
+        let cell = MediaPostsViewModel.shared.checkPostTypeCell(for: mediaPost, for: tableView)
+        
+        return cell
 
-        case let textPost as TextPost:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "textCell") as! TextPostTableViewCell
-            cell.nameLabel.text = textPost.userName
-            cell.dateLabel.text = postDateFormatter.string(from: textPost.timestamp)
-            cell.messageLabel.text = textPost.textBody
-            return cell
-
-        case let imagePost as ImagePost:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "imageCell") as! ImagePostTableViewCell
-            cell.nameLabel.text = imagePost.userName
-            cell.dateLabel.text = postDateFormatter.string(from: imagePost.timestamp)
-            cell.messageLabel.text = imagePost.textBody
-            cell.messageImage.image = imagePost.image
-            return cell
-
-        default:
-            let cell = UITableViewCell()
-            cell.textLabel?.text = mediaPost.textBody
-            return cell
-        }
     }
+}
 
+extension ViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        picker.dismiss(animated: true, completion: nil)
+        
+        guard let image = info[.originalImage] as? UIImage else {
+            print("No image found")
+            return
+        }
+        userPickedImage = image
+        presentImagePostAlert()
+    }
+    
 }
 
 

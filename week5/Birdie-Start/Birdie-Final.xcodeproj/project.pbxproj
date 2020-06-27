@@ -11,6 +11,7 @@
 		4040705124A6CB1100E8D682 /* TextPostTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4040704F24A6CB1100E8D682 /* TextPostTableViewCell.xib */; };
 		4040705424A6CB2200E8D682 /* ImagePostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4040705224A6CB2200E8D682 /* ImagePostTableViewCell.swift */; };
 		4040705524A6CB2200E8D682 /* ImagePostTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4040705324A6CB2200E8D682 /* ImagePostTableViewCell.xib */; };
+		4040705724A7EB9E00E8D682 /* MediaPostsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4040705624A7EB9E00E8D682 /* MediaPostsViewModel.swift */; };
 		C3C9D35E249B324B001F55A6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C9D35D249B324B001F55A6 /* AppDelegate.swift */; };
 		C3C9D360249B324B001F55A6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C9D35F249B324B001F55A6 /* SceneDelegate.swift */; };
 		C3C9D362249B324B001F55A6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C9D361249B324B001F55A6 /* ViewController.swift */; };
@@ -48,6 +49,7 @@
 		4040704F24A6CB1100E8D682 /* TextPostTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextPostTableViewCell.xib; sourceTree = "<group>"; };
 		4040705224A6CB2200E8D682 /* ImagePostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePostTableViewCell.swift; sourceTree = "<group>"; };
 		4040705324A6CB2200E8D682 /* ImagePostTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImagePostTableViewCell.xib; sourceTree = "<group>"; };
+		4040705624A7EB9E00E8D682 /* MediaPostsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaPostsViewModel.swift; sourceTree = "<group>"; };
 		C3C9D35A249B324B001F55A6 /* Birdie-Final.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Birdie-Final.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3C9D35D249B324B001F55A6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C3C9D35F249B324B001F55A6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -199,6 +201,7 @@
 		C3C9D39E249B3C30001F55A6 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				4040705624A7EB9E00E8D682 /* MediaPostsViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -346,6 +349,7 @@
 				C3C9D35E249B324B001F55A6 /* AppDelegate.swift in Sources */,
 				C3C9D360249B324B001F55A6 /* SceneDelegate.swift in Sources */,
 				4040705024A6CB1100E8D682 /* TextPostTableViewCell.swift in Sources */,
+				4040705724A7EB9E00E8D682 /* MediaPostsViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
