@@ -19,20 +19,23 @@ class ViewController: UIViewController {
     }
 
     func setUpTableView() {
-        self.tableview.dataSource = self
+        tableview.dataSource = self
         
         let textCellNib = UINib(nibName: "TextPostTableViewCell", bundle: nil)
         let imageCellNib = UINib(nibName: "ImagePostTableViewCell", bundle: nil)
         
-        self.tableview.register(textCellNib, forCellReuseIdentifier: "textCell")
-        self.tableview.register(imageCellNib, forCellReuseIdentifier: "imageCell")
+        tableview.register(textCellNib, forCellReuseIdentifier: "textCell")
+        tableview.register(imageCellNib, forCellReuseIdentifier: "imageCell")
+        
+        tableview.rowHeight = UITableView.automaticDimension
+        tableview.estimatedRowHeight = 120.0
     }
     
     
 
     @IBAction func didPressCreateTextPostButton(_ sender: Any) {
 
-        let alert = UIAlertController(title: "Create Post", message: "", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Create Post", message: "what's up?", preferredStyle: .alert)
         alert.addTextField()
         alert.addTextField()
         
@@ -71,33 +74,24 @@ extension ViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let mediaPost = MediaPostsHandler.shared.mediaPosts[indexPath.row]
         
-//        if let mediaPost = mediaPost as? TextPost {
-//            let cell = tableView.dequeueReusableCell(withIdentifier: "textCell") as! TextPostTableViewCell
-//            cell.nameLabel.text = mediaPost.userName
-//            cell.dateLabel.text = "mediaPost.timestamp"
-//            cell.messageLabel.text = mediaPost.textBody
-//            return cell
-//        } else {
-//            let cell = UITableViewCell()
-//            cell.textLabel?.text = mediaPost.textBody
-//            return cell
-//        }
+        let mediaPost = MediaPostsHandler.shared.mediaPosts[indexPath.row]
+        let postDateFormatter = DateFormatter()
+        postDateFormatter.dateFormat = "dd MMM, HH:mm:ss"
         
         switch mediaPost {
 
         case let textPost as TextPost:
             let cell = tableView.dequeueReusableCell(withIdentifier: "textCell") as! TextPostTableViewCell
             cell.nameLabel.text = textPost.userName
-            cell.dateLabel.text = "textPost.timestamp"
+            cell.dateLabel.text = postDateFormatter.string(from: textPost.timestamp)
             cell.messageLabel.text = textPost.textBody
             return cell
 
         case let imagePost as ImagePost:
             let cell = tableView.dequeueReusableCell(withIdentifier: "imageCell") as! ImagePostTableViewCell
             cell.nameLabel.text = imagePost.userName
-            cell.dateLabel.text = "imagePost.timestamp"
+            cell.dateLabel.text = postDateFormatter.string(from: imagePost.timestamp)
             cell.messageLabel.text = imagePost.textBody
             cell.messageImage.image = imagePost.image
             return cell
