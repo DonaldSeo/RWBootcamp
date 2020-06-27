@@ -101,7 +101,6 @@ class ViewController: UIViewController {
 
             let name = alert.textFields![0]
             let message = alert.textFields![1]
-//            self.setUpImagePicker()
             if let pickedImage = self.userPickedImage {
                 let imagePost = ImagePost(textBody: message.text!, userName: name.text!, timestamp: Date(), image: pickedImage)
                 MediaPostsHandler.shared.addImagePost(imagePost: imagePost)
