@@ -43,6 +43,8 @@ class PokemonCollectionViewDelegate: NSObject, UICollectionViewDelegateFlowLayou
   }
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    
+    
     let maxWidth = UIScreen.main.bounds.width
     let totalSpacing = interItemSpacing * numberOfItemsPerRow
     
@@ -53,6 +55,8 @@ class PokemonCollectionViewDelegate: NSObject, UICollectionViewDelegateFlowLayou
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
     return interItemSpacing
   }
+  
+  
    
   
 }

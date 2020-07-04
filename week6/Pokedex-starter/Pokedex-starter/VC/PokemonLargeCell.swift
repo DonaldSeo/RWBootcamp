@@ -32,49 +32,21 @@
 
 import UIKit
 
-class DataSource: NSObject, UICollectionViewDataSource {
+class PokemonLargeCell: UICollectionViewCell {
   
-  let pokemons = PokemonGenerator.shared.generatePokemons()
+  static let reuseIdentifier = String(describing: PokemonLargeCell.self)
   
-  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    pokemons.count
-  }
+  @IBOutlet weak var imageView: UIImageView!
+  @IBOutlet weak var nameLabel: UILabel!
   
-  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    guard let pokemonCell = collectionView.dequeueReusableCell(withReuseIdentifier: PokemonCell.reuseIdentifier, for: indexPath) as? PokemonCell else {
-      fatalError("Cell cannot be created")
+  
+  @IBOutlet weak var baseExpLabel: UILabel!
+  @IBOutlet weak var heightLabel: UILabel!
+  @IBOutlet weak var weightLabel: UILabel!
+  
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        // Initialization code
     }
 
-    let pokemon = pokemons[indexPath.item]
-    pokemonCell.imageView?.image = UIImage(named: "\(pokemon.pokemonID)")
-    pokemonCell.nameLabel?.text = pokemon.pokemonName
-
-    return pokemonCell
-  }
 }
-    
-//    let pokemon = pokemons[indexPath.item]
-//
-//    if let pokemonCell = collectionView.dequeueReusableCell(withReuseIdentifier: PokemonCell.reuseIdentifier, for: indexPath) as? PokemonCell {
-//
-//      pokemonCell.imageView?.image = UIImage(named: "\(pokemon.pokemonID)")
-//      pokemonCell.nameLabel?.text = pokemon.pokemonName
-//
-//      return pokemonCell
-//
-//    } else if let pokemonLargeCell = collectionView.dequeueReusableCell(withReuseIdentifier: PokemonLargeCell.reuseIdentifier, for: indexPath) as? PokemonLargeCell {
-//
-//      pokemonLargeCell.imageView?.image = UIImage(named: "\(pokemon.pokemonID)")
-//      pokemonLargeCell.nameLabel?.text = "\(pokemon.pokemonName)"
-//      pokemonLargeCell.baseExpLabel?.text = "\(pokemon.baseExp)"
-//      pokemonLargeCell.heightLabel?.text = "\(pokemon.height)"
-//      pokemonLargeCell.weightLabel?.text = "\(pokemon.weight)"
-//
-//        return pokemonLargeCell
-//
-//    }
-//    fatalError("failed to create either one of the cell type")
-//
-//    return UICollectionViewCell()
-//  }
-  

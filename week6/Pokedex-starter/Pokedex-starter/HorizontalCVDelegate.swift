@@ -32,49 +32,36 @@
 
 import UIKit
 
-class DataSource: NSObject, UICollectionViewDataSource {
+class HorizontalCVDelegate: NSObject, UICollectionViewDelegateFlowLayout {
   
-  let pokemons = PokemonGenerator.shared.generatePokemons()
+  let interItemSpacing: CGFloat
   
-  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    pokemons.count
+  init(interItemSpacing: CGFloat) {
+    self.interItemSpacing = interItemSpacing
   }
   
-  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    guard let pokemonCell = collectionView.dequeueReusableCell(withReuseIdentifier: PokemonCell.reuseIdentifier, for: indexPath) as? PokemonCell else {
-      fatalError("Cell cannot be created")
-    }
-
-    let pokemon = pokemons[indexPath.item]
-    pokemonCell.imageView?.image = UIImage(named: "\(pokemon.pokemonID)")
-    pokemonCell.nameLabel?.text = pokemon.pokemonName
-
-    return pokemonCell
-  }
-}
+  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
     
-//    let pokemon = pokemons[indexPath.item]
-//
-//    if let pokemonCell = collectionView.dequeueReusableCell(withReuseIdentifier: PokemonCell.reuseIdentifier, for: indexPath) as? PokemonCell {
-//
-//      pokemonCell.imageView?.image = UIImage(named: "\(pokemon.pokemonID)")
-//      pokemonCell.nameLabel?.text = pokemon.pokemonName
-//
-//      return pokemonCell
-//
-//    } else if let pokemonLargeCell = collectionView.dequeueReusableCell(withReuseIdentifier: PokemonLargeCell.reuseIdentifier, for: indexPath) as? PokemonLargeCell {
-//
-//      pokemonLargeCell.imageView?.image = UIImage(named: "\(pokemon.pokemonID)")
-//      pokemonLargeCell.nameLabel?.text = "\(pokemon.pokemonName)"
-//      pokemonLargeCell.baseExpLabel?.text = "\(pokemon.baseExp)"
-//      pokemonLargeCell.heightLabel?.text = "\(pokemon.height)"
-//      pokemonLargeCell.weightLabel?.text = "\(pokemon.weight)"
-//
-//        return pokemonLargeCell
-//
-//    }
-//    fatalError("failed to create either one of the cell type")
-//
-//    return UICollectionViewCell()
-//  }
+    
+    let maxWidth = UIScreen.main.bounds.width
+    let maxHeight = UIScreen.main.bounds.height
+    
+    let itemWidth = maxWidth * 0.85
+    let itemHeight = maxHeight * 0.7
+    return CGSize(width: itemWidth, height: itemHeight)
+  }
   
+  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+    return interItemSpacing
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+    UIEdgeInsets(top: 30, left: 30, bottom: 30, right: 10)
+  }
+  
+  
+  
+  
+   
+  
+}
