@@ -35,7 +35,8 @@ import UIKit
 class CompactViewController: UIViewController {
   
   
-  @IBOutlet weak var collectionView: UICollectionView!
+
+  @IBOutlet weak var compactCollectionView: UICollectionView!
   
   let dataSource = DataSource()
   let delegate = PokemonCollectionViewDelegate(numberOfItemsPerRow: 3, interItemSpacing: 5)
@@ -43,8 +44,35 @@ class CompactViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     let pokemonCell = UINib(nibName: "PokemonCell", bundle: nil)
-    collectionView.register(pokemonCell, forCellWithReuseIdentifier: PokemonCell.reuseIdentifier)
-    collectionView.dataSource = dataSource
-    collectionView.delegate = delegate
+    compactCollectionView.register(pokemonCell, forCellWithReuseIdentifier: PokemonCell.reuseIdentifier)
+    compactCollectionView.dataSource = dataSource
+    compactCollectionView.delegate = delegate
   }
+  
+  
+//  override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
+//
+//
+//      if UIDevice.current.orientation.isLandscape,
+//        let layout = compactCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+////        let maxWidth = UIScreen.main.bounds.height
+////        let totalSpacing = delegate.interItemSpacing * delegate.numberOfItemsPerRow
+////        let itemWidth = (maxWidth - totalSpacing) / delegate.numberOfItemsPerRow
+////
+////        layout.itemSize = CGSize(width: itemWidth, height: itemWidth)
+////        layout.invalidateLayout()
+//        compactCollectionView.reloadData()
+//
+//      } else if UIDevice.current.orientation.isPortrait,
+//          let layout = compactCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+////          let maxWidth = UIScreen.main.bounds.height
+////          let totalSpacing = delegate.interItemSpacing * delegate.numberOfItemsPerRow
+////          let itemWidth = (maxWidth - totalSpacing) / delegate.numberOfItemsPerRow
+////
+////          layout.itemSize = CGSize(width: itemWidth, height: itemWidth)
+////          layout.invalidateLayout()
+//    compactCollectionView.reloadData()
+//
+//      }
+//  }
 }

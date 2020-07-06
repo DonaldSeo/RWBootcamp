@@ -42,9 +42,10 @@ class HorizontalCVDelegate: NSObject, UICollectionViewDelegateFlowLayout {
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
     
-    
+
     let maxWidth = UIScreen.main.bounds.width
     let maxHeight = UIScreen.main.bounds.height
+  
     
     let itemWidth = maxWidth * 0.85
     let itemHeight = maxHeight * 0.7

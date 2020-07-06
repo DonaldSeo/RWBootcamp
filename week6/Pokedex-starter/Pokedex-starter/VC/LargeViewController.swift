@@ -34,7 +34,8 @@ import UIKit
 
 class LargeViewController: UIViewController {
   
-  @IBOutlet weak var collectionView: UICollectionView!
+  
+  @IBOutlet weak var largeCollectionView: UICollectionView!
   let pokemons = PokemonGenerator.shared.generatePokemons()
   
   let dataSource = HorizontalCVDataSource()
@@ -43,11 +44,38 @@ class LargeViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     let pokemonLargeCell = UINib(nibName: "PokemonLargeCell", bundle: nil)
-    collectionView.register(pokemonLargeCell, forCellWithReuseIdentifier: PokemonLargeCell.reuseIdentifier)
-    collectionView.dataSource = dataSource
-    collectionView.delegate = delegate
+    largeCollectionView.register(pokemonLargeCell, forCellWithReuseIdentifier: PokemonLargeCell.reuseIdentifier)
+    largeCollectionView.dataSource = dataSource
+    largeCollectionView.delegate = delegate
     
     
+  }
+  
+  override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
+    super.willTransition(to: newCollection, with: coordinator)
+    guard tabBarController?.selectedIndex == 1 else { return }
+    
+    if UIDevice.current.orientation.isLandscape{
+      guard let layout = largeCollectionView.collectionViewLayout as? UICollectionViewFlowLayout else {
+        fatalError("nil unwrapping")
+        }
+        let (maxWidth, maxHeight) = setupCollectionViewCell()
+        layout.itemSize = CGSize(width: maxWidth*0.60, height: maxHeight*0.7)
+        layout.invalidateLayout()
+    } else if UIDevice.current.orientation.isPortrait {
+      guard let layout = largeCollectionView.collectionViewLayout as? UICollectionViewFlowLayout else {
+        fatalError("nil unwrapping")
+      }
+      let (maxWidth, maxHeight) = setupCollectionViewCell()
+      layout.itemSize = CGSize(width: maxWidth*0.85, height: maxHeight*0.7)
+      layout.invalidateLayout()
+      }
+  }
+
+  func setupCollectionViewCell() -> (CGFloat, CGFloat) {
+    let maxWidth = UIScreen.main.bounds.width
+    let maxHeight = UIScreen.main.bounds.height
+    return (maxWidth, maxHeight)
   }
   
 }

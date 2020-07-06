@@ -88,11 +88,11 @@
 		185CB1FA23C78CE6009F7571 /* Pokedex-starter */ = {
 			isa = PBXGroup;
 			children = (
+				40330B9B24B3AB2B005B9ADD /* Views */,
 				40330B8E24AFF731005B9ADD /* Model */,
 				40330B7D24AEACC1005B9ADD /* VC */,
 				185CB1FB23C78CE6009F7571 /* AppDelegate.swift */,
 				185CB1FD23C78CE6009F7571 /* SceneDelegate.swift */,
-				185CB20123C78CE6009F7571 /* Main.storyboard */,
 				185CB20423C78CE8009F7571 /* Assets.xcassets */,
 				180DC61423C78D9800486B1A /* LaunchScreen.storyboard */,
 				185CB20923C78CE8009F7571 /* Info.plist */,
@@ -109,11 +109,9 @@
 			isa = PBXGroup;
 			children = (
 				40330B8424AFDFF2005B9ADD /* PokemonCell.swift */,
-				40330B8524AFDFF2005B9ADD /* PokemonCell.xib */,
 				40330B8824AFE394005B9ADD /* CompactViewController.swift */,
 				40330B8F24B01160005B9ADD /* LargeViewController.swift */,
 				40330B9124B015C7005B9ADD /* PokemonLargeCell.swift */,
-				40330B9224B015C7005B9ADD /* PokemonLargeCell.xib */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -124,6 +122,16 @@
 				A10D04F824ABC8DB00DE5D14 /* Pokemon.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		40330B9B24B3AB2B005B9ADD /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				40330B8524AFDFF2005B9ADD /* PokemonCell.xib */,
+				40330B9224B015C7005B9ADD /* PokemonLargeCell.xib */,
+				185CB20123C78CE6009F7571 /* Main.storyboard */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		A125200724AAAB64008F7E2E /* Resources */ = {
