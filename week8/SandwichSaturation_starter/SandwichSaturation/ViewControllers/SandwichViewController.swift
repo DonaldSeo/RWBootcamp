@@ -16,6 +16,7 @@ class SandwichViewController: UITableViewController, SandwichDataSource {
   let searchController = UISearchController(searchResultsController: nil)
   var sandwiches = [SandwichData]()
   var filteredSandwiches = [SandwichData]()
+  let defaults = UserDefaults.standard
 
   required init?(coder: NSCoder) {
     super.init(coder: coder)
@@ -89,6 +90,7 @@ class SandwichViewController: UITableViewController, SandwichDataSource {
   }
   
   var isFiltering: Bool {
+    searchController.searchBar.selectedScopeButtonIndex = defaults.integer(forKey: "selectedScope")
     let searchBarScopeIsFiltering =
       searchController.searchBar.selectedScopeButtonIndex != 0
     return searchController.isActive &&
@@ -137,6 +139,8 @@ extension SandwichViewController: UISearchBarDelegate {
       selectedScopeButtonIndexDidChange selectedScope: Int) {
     let sauceAmount = SauceAmount(rawValue:
       searchBar.scopeButtonTitles![selectedScope])
+    defaults.set(selectedScope, forKey: "selectedScope")
+    print(defaults.integer(forKey: "selectedScope"))
     filterContentForSearchText(searchBar.text!, sauceAmount: sauceAmount)
   }
 }
