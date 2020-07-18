@@ -13,6 +13,10 @@ protocol SandwichDataSource {
 }
 
 class SandwichViewController: UITableViewController, SandwichDataSource {
+  
+  private let appDelegate = UIApplication.shared.delegate as! AppDelegate
+  private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+  
   let searchController = UISearchController(searchResultsController: nil)
   var sandwiches = [SandwichData]()
   var filteredSandwiches = [SandwichData]()
@@ -58,6 +62,22 @@ class SandwichViewController: UITableViewController, SandwichDataSource {
     let sandwichArray = loadFromJSON()
     sandwiches.append(contentsOf: sandwichArray)
   }
+  
+//  TODO: fix sauseAmount saved with nil
+  func saveToCoreData(with sandwichArray: [SandwichData] ) {
+    sandwichArray.forEach { (SandwichData) in
+      let sandwich = Sandwich(entity: Sandwich.entity(), insertInto: context)
+      sandwich.image = SandwichData.imageName
+      print(SandwichData.sauceAmount.rawValue)
+      sandwich.sauceAmount?.sauceAmountString = SandwichData.sauceAmount.rawValue
+      print(sandwich.sauceAmount?.sauceAmountString)
+      
+      sandwich.name = SandwichData.name
+      print(sandwich)
+      appDelegate.saveContext()
+    }
+    
+  }
 
   func loadFromJSON() -> [SandwichData] {
     guard let sandwichJSONURL = Bundle.main.url(forResource: "sandwiches", withExtension: "json") else {
@@ -68,6 +88,8 @@ class SandwichViewController: UITableViewController, SandwichDataSource {
     do {
       let sandwichData = try Data(contentsOf: sandwichJSONURL)
       let sandwiches: [SandwichData] = try decoder.decode([SandwichData].self, from: sandwichData)
+//      print(sandwiches)
+      saveToCoreData(with: sandwiches)
       return sandwiches
     } catch let error {
       print(error)
@@ -128,6 +150,7 @@ class SandwichViewController: UITableViewController, SandwichDataSource {
     guard let cell = tableView.dequeueReusableCell(withIdentifier: "sandwichCell", for: indexPath) as? SandwichCell
       else { return UITableViewCell() }
     
+    //TODO: fetch from Core Data, remove array
     let sandwich = isFiltering ?
       filteredSandwiches[indexPath.row] :
       sandwiches[indexPath.row]
