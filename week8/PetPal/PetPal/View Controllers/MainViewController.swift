@@ -37,12 +37,12 @@ class MainViewController: UIViewController {
   private let appDelegate = UIApplication.shared.delegate as! AppDelegate
   private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
 	
-	private var friends = [Friend]()
+  private var fetchedRC: NSFetchedResultsController<Friend>!
 	private var filtered = [Friend]()
 	private var isFiltered = false
-	private var friendPets = [String:[String]]()
 	private var selected:IndexPath!
 	private var picker = UIImagePickerController()
+  private var query = ""
   
 
 	override func viewDidLoad() {
@@ -66,13 +66,8 @@ class MainViewController: UIViewController {
 		if segue.identifier == "petSegue" {
 			if let index = sender as? IndexPath {
 				let pvc = segue.destination as! PetsViewController
-				let friend = friends[index.row]
-        if let pets = friendPets[friend.name!] {
-					pvc.pets = pets
-				}
-				pvc.petAdded = {
-          self.friendPets[friend.name!] = pvc.pets
-				}
+        let friend = fetchedRC.object(at: index)
+        pvc.friend = friend
 			}
 		}
 	}
@@ -86,20 +81,32 @@ class MainViewController: UIViewController {
     friend.dob = data.dob as Date
     friend.eyeColor = data.eyeColor
     appDelegate.saveContext()
-		friends.append(friend)
-		let index = IndexPath(row:friends.count - 1, section:0)
-		collectionView?.insertItems(at: [index])
+
+		refresh()
+    collectionView.reloadData()
+    showEditButton()
 	}
 	
 	// MARK:- Private Methods
 	private func showEditButton() {
-		if friends.count > 0 {
+    guard let objs = fetchedRC.fetchedObjects else {
+      return
+    }
+		if objs.count > 0 {
 			navigationItem.leftBarButtonItem = editButtonItem
 		}
 	}
   private func refresh() {
+    let request = Friend.fetchRequest() as NSFetchRequest<Friend>
+    if !query.isEmpty {
+      request.predicate = NSPredicate(format: "name CONTAINS[cd] %@", query)
+    }
+    let sort = NSSortDescriptor(key: #keyPath(Friend.name), ascending: true, selector: #selector(NSString.caseInsensitiveCompare(_:)))
+    let color = NSSortDescriptor(key: #keyPath(Friend.eyeColor), ascending: true)
+    request.sortDescriptors = [color, sort]
     do {
-      friends = try context.fetch(Friend.fetchRequest())
+      fetchedRC = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: #keyPath(Friend.eyeColor), cacheName: nil)
+      try fetchedRC.performFetch()
     } catch let error as NSError {
       print("Could not fetch \(error), \(error.userInfo)")
     }
@@ -108,14 +115,33 @@ class MainViewController: UIViewController {
 
 // Collection View Delegates
 extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+  
+  func numberOfSections(in collectionView: UICollectionView) -> Int {
+    return fetchedRC.sections?.count ?? 0
+  }
+  
+  
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		let count = isFiltered ? filtered.count : friends.count
-		return count
+    guard let sections = fetchedRC.sections, let objs = sections[section].objects else {
+      return 0
+    }
+    return objs.count
 	}
+  
+  func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+    
+    let view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "HeaderRow", for: indexPath)
+    if let label = view.viewWithTag(1000) as? UILabel {
+      if let friends = fetchedRC.sections?[indexPath.section].objects as? [Friend], let friend = friends.first {
+        label.text = "Eye color: " + friend.eyeColorString
+      }
+    }
+    return view
+  }
 	
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FriendCell", for: indexPath) as! FriendCell
-		let friend = isFiltered ? filtered[indexPath.row] : friends[indexPath.row]
+    let friend = fetchedRC.object(at: indexPath)
     cell.nameLabel.text = friend.name!
     cell.addressLabel.text = friend.address!
     cell.ageLabel.text = "Age: \(friend.age)"
@@ -141,40 +167,33 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
 // Search Bar Delegate
 extension MainViewController:UISearchBarDelegate {
 	func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-		guard let query = searchBar.text else {
+		guard let txt = searchBar.text else {
 			return
 		}
-    let request = Friend.fetchRequest() as NSFetchRequest<Friend>
-    request.predicate = NSPredicate(format: "name CONTAINS[cd] %@", query)
-    do {
-      friends = try context.fetch(request)
-    } catch let error as NSError {
-      print("Could not fetch. \(error), \(error.userInfo)")
-    }
-		isFiltered = true
-		filtered = friends.filter({(friend) -> Bool in
-      return friend.name!.contains(query)
-		})
+    query = txt
+    refresh()
 		searchBar.resignFirstResponder()
 		collectionView.reloadData()
 	}
 	
 	func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+    query = ""
+    searchBar.text = nil
+    searchBar.resignFirstResponder()
     refresh()
-		searchBar.text = nil
-		searchBar.resignFirstResponder()
 		collectionView.reloadData()
 	}
 }
 
 // Image Picker Delegates
 extension MainViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+  
 	func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
     // Local variable inserted by Swift 4.2 migrator.
     let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
 
 		let image = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.originalImage)] as! UIImage
-		let friend = isFiltered ? filtered[selected.row] : friends[selected.row]
+    let friend = fetchedRC.object(at: selected)
     friend.photo = image.pngData() as Data?
     appDelegate.saveContext()
 		collectionView?.reloadItems(at: [selected])

@@ -22,5 +22,6 @@ extension Friend {
     @NSManaged public var dob: Date?
     @NSManaged public var eyeColor: NSObject?
     @NSManaged public var photo: Data?
+    @NSManaged public var pets: Pets
 
 }
