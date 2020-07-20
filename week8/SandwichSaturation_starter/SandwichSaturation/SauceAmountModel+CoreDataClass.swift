@@ -2,7 +2,7 @@
 //  SauceAmountModel+CoreDataClass.swift
 //  SandwichSaturation
 //
-//  Created by Donald Seo on 2020-07-18.
+//  Created by Donald Seo on 2020-07-19.
 //  Copyright © 2020 Jeff Rames. All rights reserved.
 //
 //
@@ -12,6 +12,7 @@ import CoreData
 
 
 public class SauceAmountModel: NSManagedObject {
+  
   var sauceAmount: SauceAmount {
     get {
       guard let sauceAmountString = self.sauceAmountString,
@@ -25,4 +26,5 @@ public class SauceAmountModel: NSManagedObject {
       self.sauceAmountString = newValue.rawValue
     }
   }
+
 }

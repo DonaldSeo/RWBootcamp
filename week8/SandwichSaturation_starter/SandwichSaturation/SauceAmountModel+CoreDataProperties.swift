@@ -2,7 +2,7 @@
 //  SauceAmountModel+CoreDataProperties.swift
 //  SandwichSaturation
 //
-//  Created by Donald Seo on 2020-07-18.
+//  Created by Donald Seo on 2020-07-19.
 //  Copyright © 2020 Jeff Rames. All rights reserved.
 //
 //
