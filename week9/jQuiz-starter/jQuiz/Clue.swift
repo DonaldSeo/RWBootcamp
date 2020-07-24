@@ -8,10 +8,29 @@
 
 import Foundation
 
-struct Clue {
+// MARK: - Clue
+struct Clue: Codable {
+    let id: Int
+    let answer, question: String
+    let value: Int
+    let categoryID: Int
+    let category: Category
 
+    enum CodingKeys: String, CodingKey {
+        case id, answer, question, value
+        case categoryID = "category_id"
+        case category
+    }
 }
 
-struct Category {
+// MARK: - Category
+struct Category: Codable {
+    let id: Int
+    let title: String
+    let cluesCount: Int
 
+    enum CodingKeys: String, CodingKey {
+        case id, title
+        case cluesCount = "clues_count"
+    }
 }
