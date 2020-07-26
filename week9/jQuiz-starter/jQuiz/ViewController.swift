@@ -58,8 +58,18 @@ class ViewController: UIViewController {
   func setUpView() {
     categoryLabel.text = clues[0].category.title
     clueLabel.text = clues.randomElement()?.question
+    scoreLabel.text = "\(self.points)"
     print("here is answer \(clues.randomElement()?.answer ?? "no clues here")")
     tableView.reloadData()
+  }
+  
+  func calculateScore(answer: Clue) {
+    if answer.question == clueLabel.text {
+      points += 10
+      getClues()
+    } else {
+      getClues()
+    }
   }
   
 
@@ -94,7 +104,9 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
   }
 
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
+    calculateScore(answer: clues[indexPath.row])
+    tableView.deselectRow(at: indexPath, animated: true)
+    
   }
 }
 
