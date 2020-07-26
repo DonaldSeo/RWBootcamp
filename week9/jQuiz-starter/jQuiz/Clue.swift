@@ -8,6 +8,11 @@
 
 import Foundation
 
+struct ClueResponse: Codable {
+  var results: [Clue]
+}
+
+
 // MARK: - Clue
 struct Clue: Codable {
     let id: Int
