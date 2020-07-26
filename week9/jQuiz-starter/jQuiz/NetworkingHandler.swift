@@ -30,9 +30,6 @@ class Networking {
         return
       }
       print(clue[0].categoryID)
-//      DispatchQueue.main.async {
-//        print(response)
-//      }
       completion(clue[0].categoryID)
     }.resume()
     
@@ -50,9 +47,11 @@ class Networking {
       }
       let decoder = JSONDecoder()
       guard let clues = try? decoder.decode([Clue].self, from: data) else {
+        print("clues are empty")
         return
       }
       print(clues)
+      completion(clues)
     }.resume()
   }
 }

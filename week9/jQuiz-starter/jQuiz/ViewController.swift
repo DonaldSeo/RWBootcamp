@@ -27,8 +27,6 @@ class ViewController: UIViewController {
     tableView.delegate = self
     tableView.dataSource = self
     tableView.separatorStyle = .none
-//    Networking.sharedInstance.getRandomCategory()
-//    getRandomCategory()
     getClues()
     
     self.scoreLabel.text = "\(self.points)"
@@ -48,11 +46,20 @@ class ViewController: UIViewController {
 
       guard let id = categoryId else { return }
       Networking.sharedInstance.getAllCluesInCategory(categoryId: id) { (clues) in
-        self.clues = clues
-        print("clues are here \(self.clues)")
-//        self.setUpView()
+        DispatchQueue.main.async {
+          self.clues = Array(clues.prefix(upTo: 4))
+          
+          self.setUpView()
+        }
       }
     })
+  }
+  
+  func setUpView() {
+    categoryLabel.text = clues[0].category.title
+    clueLabel.text = clues.randomElement()?.question
+    print("here is answer \(clues.randomElement()?.answer ?? "no clues here")")
+    tableView.reloadData()
   }
   
 
@@ -61,28 +68,29 @@ class ViewController: UIViewController {
 
 
   @IBAction func didPressVolumeButton(_ sender: Any) {
-      SoundManager.shared.toggleSoundPreference()
-      if SoundManager.shared.isSoundEnabled == false {
-          soundButton.setImage(UIImage(systemName: "speaker.slash"), for: .normal)
-      } else {
-          soundButton.setImage(UIImage(systemName: "speaker"), for: .normal)
-      }
+    SoundManager.shared.toggleSoundPreference()
+    if SoundManager.shared.isSoundEnabled == false {
+        soundButton.setImage(UIImage(systemName: "speaker.slash"), for: .normal)
+    } else {
+        soundButton.setImage(UIImage(systemName: "speaker"), for: .normal)
+    }
   }
 
 }
 
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-      return clues.count
+    return clues.count
   }
 
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-      return UITableView.automaticDimension
+    return UITableView.automaticDimension
   }
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-      let cell = UITableViewCell()
-      return cell
+    let cell = tableView.dequeueReusableCell(withIdentifier: "AnswerCell", for: indexPath)
+    cell.textLabel?.text = clues[indexPath.row].answer
+    return cell
   }
 
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
