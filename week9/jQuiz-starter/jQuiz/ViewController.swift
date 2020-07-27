@@ -48,7 +48,6 @@ class ViewController: UIViewController {
       Networking.sharedInstance.getAllCluesInCategory(categoryId: id) { (clues) in
         DispatchQueue.main.async {
           self.clues = Array(clues.prefix(upTo: 4))
-          
           self.setUpView()
         }
       }
@@ -57,7 +56,11 @@ class ViewController: UIViewController {
   
   func setUpView() {
     categoryLabel.text = clues[0].category.title
-    clueLabel.text = clues.randomElement()?.question
+    var randomClue = clues.randomElement()
+    while (randomClue?.question == "") {
+      randomClue = clues.randomElement()
+    }
+    clueLabel.text = randomClue?.question
     scoreLabel.text = "\(self.points)"
     print("here is answer \(clues.randomElement()?.answer ?? "no clues here")")
     tableView.reloadData()
@@ -71,11 +74,6 @@ class ViewController: UIViewController {
       getClues()
     }
   }
-  
-
-
-
-
 
   @IBAction func didPressVolumeButton(_ sender: Any) {
     SoundManager.shared.toggleSoundPreference()
