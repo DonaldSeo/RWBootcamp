@@ -28,6 +28,7 @@ class ViewController: UIViewController {
     tableView.delegate = self
     tableView.dataSource = self
     tableView.separatorStyle = .none
+    downloadJeopardyImage()
     getClues()
     
     self.scoreLabel.text = "\(self.points)"
@@ -41,7 +42,17 @@ class ViewController: UIViewController {
       SoundManager.shared.playSound()
     }
     
-}
+  }
+  func downloadJeopardyImage() {
+    
+    Networking.sharedInstance.getJeopardyImage(completion: { (image) in
+      if image != nil {
+        DispatchQueue.main.async {
+          self.logoImageView.image = image
+        }
+      }
+    })
+  }
   
   func getClues() {
     Networking.sharedInstance.getRandomCategory(completion: { (categoryId) in

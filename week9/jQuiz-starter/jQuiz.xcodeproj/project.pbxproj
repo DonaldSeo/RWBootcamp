@@ -80,10 +80,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		406E21EA24CF7BEB0093754B /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C3DF5B7A24C2549400F6D3EC /* ViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		406E21EB24CF7C120093754B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C3DF5B7C24C2549400F6D3EC /* Main.storyboard */,
+				C3DF5B8424C2549A00F6D3EC /* LaunchScreen.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		4095F1EC24CE539B00834DF3 /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				C3DF5BAF24C260A600F6D3EC /* Clue.swift */,
+				C3DF5BAD24C25E1A00F6D3EC /* NetworkingHandler.swift */,
+				C3FBE53524C2877C00D11A30 /* SoundManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -109,14 +128,11 @@
 		C3DF5B7524C2549400F6D3EC /* jQuiz */ = {
 			isa = PBXGroup;
 			children = (
+				406E21EB24CF7C120093754B /* View */,
+				406E21EA24CF7BEB0093754B /* Controller */,
 				4095F1EC24CE539B00834DF3 /* Model */,
 				C3DF5BA924C254A800F6D3EC /* AppDelegate */,
-				C3DF5B7A24C2549400F6D3EC /* ViewController.swift */,
-				C3DF5BAD24C25E1A00F6D3EC /* NetworkingHandler.swift */,
-				C3FBE53524C2877C00D11A30 /* SoundManager.swift */,
 				C3FBE53724C4DEA300D11A30 /* ImageCache.swift */,
-				C3DF5B7C24C2549400F6D3EC /* Main.storyboard */,
-				C3DF5B8424C2549A00F6D3EC /* LaunchScreen.storyboard */,
 				C3DF5BAC24C256D600F6D3EC /* Assets */,
 				C3DF5B8724C2549A00F6D3EC /* Info.plist */,
 			);
