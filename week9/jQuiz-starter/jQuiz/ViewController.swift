@@ -22,6 +22,7 @@ class ViewController: UIViewController {
   var points: Int = 0
 
 
+
   override func viewDidLoad() {
     super.viewDidLoad()
     tableView.delegate = self
@@ -36,8 +37,9 @@ class ViewController: UIViewController {
     } else {
         soundButton.setImage(UIImage(systemName: "speaker"), for: .normal)
     }
-
-    SoundManager.shared.playSound()
+    if SoundManager.shared.isSoundEnabled == true {
+      SoundManager.shared.playSound()
+    }
     
 }
   
@@ -78,9 +80,11 @@ class ViewController: UIViewController {
   @IBAction func didPressVolumeButton(_ sender: Any) {
     SoundManager.shared.toggleSoundPreference()
     if SoundManager.shared.isSoundEnabled == false {
-        soundButton.setImage(UIImage(systemName: "speaker.slash"), for: .normal)
+      soundButton.setImage(UIImage(systemName: "speaker.slash"), for: .normal)
+      SoundManager.shared.stopSound()
     } else {
-        soundButton.setImage(UIImage(systemName: "speaker"), for: .normal)
+      soundButton.setImage(UIImage(systemName: "speaker"), for: .normal)
+      SoundManager.shared.playSound()
     }
   }
 

@@ -22,14 +22,10 @@ class Networking {
         let data = data else {
           return
       }
-//      if let result = String(data: data, encoding: .utf8) {
-//        print(result)
-//      }
       let decoder = JSONDecoder()
       guard let clue = try? decoder.decode([Clue].self, from: data) else {
         return
       }
-      print(clue[0].categoryID)
       completion(clue[0].categoryID)
     }.resume()
     
@@ -45,20 +41,12 @@ class Networking {
       let data = data else {
         return
       }
-      do {
-        let json = try JSONSerialization.jsonObject(with: data, options: [])
-          print(json)
-      } catch {
-          print("JSON error: \(error.localizedDescription)")
-      }
-      
 
       let decoder = JSONDecoder()
       guard let clues = try? decoder.decode([Clue].self, from: data) else {
         print("clues are empty")
         return
       }
-      print(clues)
       completion(clues)
     }.resume()
   }

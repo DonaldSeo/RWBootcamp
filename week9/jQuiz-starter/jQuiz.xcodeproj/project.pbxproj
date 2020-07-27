@@ -80,6 +80,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4095F1EC24CE539B00834DF3 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C3DF5BAF24C260A600F6D3EC /* Clue.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		C3DF5B6A24C2549400F6D3EC = {
 			isa = PBXGroup;
 			children = (
@@ -101,11 +109,11 @@
 		C3DF5B7524C2549400F6D3EC /* jQuiz */ = {
 			isa = PBXGroup;
 			children = (
+				4095F1EC24CE539B00834DF3 /* Model */,
 				C3DF5BA924C254A800F6D3EC /* AppDelegate */,
 				C3DF5B7A24C2549400F6D3EC /* ViewController.swift */,
 				C3DF5BAD24C25E1A00F6D3EC /* NetworkingHandler.swift */,
 				C3FBE53524C2877C00D11A30 /* SoundManager.swift */,
-				C3DF5BAF24C260A600F6D3EC /* Clue.swift */,
 				C3FBE53724C4DEA300D11A30 /* ImageCache.swift */,
 				C3DF5B7C24C2549400F6D3EC /* Main.storyboard */,
 				C3DF5B8424C2549A00F6D3EC /* LaunchScreen.storyboard */,
