@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -9,16 +10,85 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="AnimationPlayer" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lPm-57-Cp8">
+                                <rect key="frame" x="0.0" y="44" width="414" height="669"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="s7m-3S-wce">
+                                        <rect key="frame" x="87" y="200" width="240" height="128"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CLO-m3-2ct">
+                                <rect key="frame" x="175.5" y="649" width="63" height="63"/>
+                                <state key="normal" image="Screen Shot 2020-08-09 at 6.24.48 PM"/>
+                                <connections>
+                                    <action selector="translatePressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="3WN-qI-6zs"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WGO-7y-ksq">
+                                <rect key="frame" x="271.5" y="748" width="66" height="64"/>
+                                <state key="normal" image="Screen Shot 2020-08-09 at 6.25.01 PM"/>
+                                <connections>
+                                    <action selector="scalePressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="WYv-te-MRZ"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N1b-O7-LuJ">
+                                <rect key="frame" x="70.5" y="745" width="68" height="65"/>
+                                <state key="normal" image="Screen Shot 2020-08-09 at 6.24.54 PM"/>
+                                <connections>
+                                    <action selector="colorPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="7xd-N7-uQm"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m2M-eA-MBM">
+                                <rect key="frame" x="171.5" y="742" width="71" height="69"/>
+                                <state key="normal" image="Screen Shot 2020-08-09 at 6.24.58 PM"/>
+                                <connections>
+                                    <action selector="playPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Hhm-6k-U2c"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="m2M-eA-MBM" secondAttribute="bottom" constant="51" id="2ad-nz-i3d"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="WGO-7y-ksq" secondAttribute="bottom" constant="50" id="5Nz-6d-qw0"/>
+                            <constraint firstItem="lPm-57-Cp8" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="6Uu-wu-RGe"/>
+                            <constraint firstItem="N1b-O7-LuJ" firstAttribute="top" secondItem="lPm-57-Cp8" secondAttribute="bottom" constant="32" id="Arl-Wa-isy"/>
+                            <constraint firstItem="WGO-7y-ksq" firstAttribute="top" secondItem="lPm-57-Cp8" secondAttribute="bottom" constant="35" id="Fd9-Ff-FPe"/>
+                            <constraint firstItem="lPm-57-Cp8" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="FdG-Gj-wxw"/>
+                            <constraint firstItem="CLO-m3-2ct" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="I23-o2-fgD"/>
+                            <constraint firstItem="WGO-7y-ksq" firstAttribute="leading" secondItem="m2M-eA-MBM" secondAttribute="trailing" constant="29" id="MRh-aE-W1L"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="N1b-O7-LuJ" secondAttribute="bottom" constant="52" id="cNt-4v-xDt"/>
+                            <constraint firstItem="m2M-eA-MBM" firstAttribute="top" secondItem="CLO-m3-2ct" secondAttribute="bottom" constant="30" id="lHe-xd-tj6"/>
+                            <constraint firstItem="m2M-eA-MBM" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="qT4-aA-vNT"/>
+                            <constraint firstItem="lPm-57-Cp8" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="s91-lG-ebL"/>
+                            <constraint firstItem="m2M-eA-MBM" firstAttribute="leading" secondItem="N1b-O7-LuJ" secondAttribute="trailing" constant="33" id="xLK-U8-JWt"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <outlet property="animationView" destination="s7m-3S-wce" id="tdN-Wo-pod"/>
+                        <outlet property="leftPlayConstraint" destination="xLK-U8-JWt" id="9Xh-yQ-3Pu"/>
+                        <outlet property="rightPlayConstraint" destination="MRh-aE-W1L" id="tX4-0s-IzF"/>
+                        <outlet property="upPlayConstraint" destination="lHe-xd-tj6" id="oT5-rW-cJJ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="131.8840579710145" y="138.61607142857142"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Screen Shot 2020-08-09 at 6.24.48 PM" width="63" height="63"/>
+        <image name="Screen Shot 2020-08-09 at 6.24.54 PM" width="68" height="65"/>
+        <image name="Screen Shot 2020-08-09 at 6.24.58 PM" width="71" height="69"/>
+        <image name="Screen Shot 2020-08-09 at 6.25.01 PM" width="66" height="64"/>
+    </resources>
 </document>
